@@ -1,11 +1,15 @@
-export default function Dashboard() {
+import { Sidebar } from "@/app/components/admin/dashboard/Sidebar";
+import { MainContent } from "@/app/components/admin/dashboard/MainContent";
+import { AnimatedBackground } from "@/app/components/admin/dashboard/AnimatedBackground";
+
+export default function DashboardPage() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-      <p>
-        Real-time analytics dashboard displaying egg quality data, defect
-        detection results, and sorting metrics.
-      </p>
+    <div className="flex min-h-screen bg-gray-100 overflow-hidden">
+      <AnimatedBackground />
+      <Sidebar />
+      <main className="flex-1 ml-24 md:ml-72 transition-all duration-300 relative z-10">
+        <MainContent />
+      </main>
     </div>
   );
 }
