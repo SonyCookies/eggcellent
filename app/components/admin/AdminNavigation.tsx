@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BaseNavigation from "./BaseNavigation";
+import BaseNavigation from "../BaseNavigation";
 
 const AdminNavigation = () => {
   return (

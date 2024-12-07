@@ -1,4 +1,4 @@
-import UserNavigation from "../components/UserNavigation";
+import UserNavigation from "../components/user/UserNavigation";
 import Footer from "../components/Footer";
 
 export default function UserLayout({
