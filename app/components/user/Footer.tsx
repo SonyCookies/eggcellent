@@ -25,7 +25,7 @@ export default function Footer() {
           <div>
             <Image
               src="/placeholder.svg?height=50&width=150"
-              alt="Happy Egg Logo"
+              alt="Egg-cellent"
               width={150}
               height={50}
               className="h-12 w-auto brightness-0 invert"

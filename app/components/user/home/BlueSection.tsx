@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   Users,
   User,
@@ -12,7 +12,7 @@ import {
   BarChart3,
   Cloud,
 } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { WaveTop } from "../Waves";
 
@@ -183,9 +183,34 @@ const contentData = [
   },
 ];
 
+const duckFeetRevealTopRight = {
+  hidden: { clipPath: "inset(0 0 0 100%)" },
+  visible: {
+    clipPath: "inset(0 0 0 0)",
+    transition: {
+      duration: 4,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const duckFeetRevealBottomLeft = {
+  hidden: { clipPath: "inset(0 0 0 100%)", scaleX: -1 },
+  visible: {
+    clipPath: "inset(0 0 0 0)",
+    scaleX: -1,
+    transition: {
+      duration: 4,
+      ease: "easeInOut",
+    },
+  },
+};
+
 export const BlueSection = () => {
   const [activeContent, setActiveContent] = useState(0);
   const [direction, setDirection] = useState(0);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const nextContent = () => {
     setDirection(1);
@@ -200,8 +225,39 @@ export const BlueSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-blue-900 to-blue-950 py-16 relative min-h-screen overflow-hidden">
-      <WaveTop fill="#1e3a8a" />
+    <section
+      ref={sectionRef}
+      className="bg-blue-950 py-16 relative min-h-[60vh] overflow-hidden"
+    >
+      <WaveTop fill="#172554" />
+      <motion.div
+        className="absolute -top-4 -right-24 z-30 w-[300px] h-[150px] md:w-[600px] md:h-[300px]"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={duckFeetRevealTopRight}
+      >
+        <Image
+          src="/images/duckfeet.png"
+          alt="Duck feet"
+          width={600}
+          height={300}
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-0 left-0 z-20 w-[200px] h-[100px] md:w-[400px] md:h-[200px]"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={duckFeetRevealBottomLeft}
+      >
+        <Image
+          src="/images/duckfeet.png"
+          alt="Animated duck feet"
+          width={400}
+          height={200}
+          className="w-full h-full object-contain"
+        />
+      </motion.div>
       <div className="container mx-auto px-4 relative z-10">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-10">
           Discover Egg-Cellent
@@ -286,7 +342,7 @@ export const BlueSection = () => {
             >
               <div className="prose prose-invert max-w-none">
                 <div className="flex flex-col md:flex-row gap-8 items-start">
-                  <div className="w-full">
+                  <div className="w-full text-white">
                     {contentData[activeContent].details}
                   </div>
                 </div>
