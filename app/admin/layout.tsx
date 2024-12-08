@@ -29,8 +29,8 @@ export default function AdminLayout({
       <Sidebar className="hidden w-64 border-r md:block" items={sidebarItems} />
       <div className="flex flex-1 flex-col overflow-hidden">
         <AdminHeader sidebarItems={sidebarItems} />
-        <main className="flex-1 overflow-auto py-6">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <main className="flex-1 overflow-auto">
+          <div className="mx-auto max-w-full">
             {children}
           </div>
         </main>
